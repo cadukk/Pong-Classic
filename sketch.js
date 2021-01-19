@@ -11,7 +11,7 @@ let velocidadeYBolinha = 6;
 //variaveis da raquete
 let xRaqueteP1 = 5;
 let yRaqueteP1 = 150;
-let xRaqueteP2 = 585;
+let xRaqueteP2 = 585 ;
 let yRaqueteP2 = 150;
 let velocidadeYP2 = 0;
 
@@ -31,7 +31,7 @@ let raquetada;
 let ponto;
 let trilha;
 
-function preload() {
+function preload(){
   trilha = loadSound("trilha.mp3");
   ponto = loadSound("ponto.mp3");
   raquetada = loadSound("raquetada.mp3");
@@ -58,75 +58,75 @@ function draw() {
   marcaPonto();
 }
 
-function mostraBolinha() {
+function mostraBolinha(){
   circle(xBolinha, yBolinha, diametro);
 }
 
-function movimentaBolinha() {
-  xBolinha += velocidadeXBolinha;
+function movimentaBolinha(){
+  xBolinha += velocidadeXBolinha; 
   yBolinha += velocidadeYBolinha;
 }
 
-function verificaColisaoBorda() {
-  if (xBolinha + raio > width ||
-    xBolinha - raio < 0) {
+function verificaColisaoBorda(){
+    if(xBolinha + raio > width ||
+    xBolinha - raio < 0){
     velocidadeXBolinha *= -1;
   }
-  if (yBolinha + raio > height ||
-    yBolinha - raio < 0) {
+  if(yBolinha + raio > height ||
+    yBolinha - raio < 0){
     velocidadeYBolinha *= -1;
   }
 }
 
-function mostraRaquete(x, y) {
+function mostraRaquete(x, y){
   rect(x, y, wRaquete, hRaquete);
 }
 
-function movimentaRaqueteP1() {
-  if (keyIsDown(UP_ARROW)) {
-    yRaqueteP1 -= 10;
+function movimentaRaqueteP1(){
+  if (keyIsDown(UP_ARROW)){
+    yRaqueteP1 -=10;
   }
-  if (keyIsDown(DOWN_ARROW)) {
-    yRaqueteP1 += 10;
+  if (keyIsDown(DOWN_ARROW)){
+    yRaqueteP1 +=10;
   }
 }
 
 function calculaChanceDeErrar() {
   if (pontosP1 >= pontosP2) {
     chanceDeErrar += 1
-    if (chanceDeErrar >= 39) {
-      chanceDeErrar = 40
+    if (chanceDeErrar >= 39){
+    chanceDeErrar = 40
     }
   } else {
     chanceDeErrar -= 1
-    if (chanceDeErrar <= 35) {
-      chanceDeErrar = 35
+    if (chanceDeErrar <= 35){
+    chanceDeErrar = 35
     }
   }
 }
 
-function movimentaRaqueteP2() {
+function movimentaRaqueteP2(){
   velocidadeYP2 = yBolinha - yRaqueteP2 - wRaquete / 2 - 30;
   yRaqueteP2 += velocidadeYP2 + chanceDeErrar;
   calculaChanceDeErrar();
 }
 
-function verificaColisaoRaqueteP1() {
-  if (xBolinha - raio < xRaqueteP1 + wRaquete && yBolinha - raio < yRaqueteP1 + hRaquete && yBolinha + raio > yRaqueteP1) {
+function verificaColisaoRaqueteP1(){
+  if (xBolinha - raio < xRaqueteP1 + wRaquete && yBolinha - raio < yRaqueteP1 +hRaquete && yBolinha + raio > yRaqueteP1){
     velocidadeXBolinha *= -1;
     raquetada.play();
   }
 }
 
-function verificaColisaoRaquete(x, y) {
+function verificaColisaoRaquete(x, y){
   colidiu = collideRectCircle(x, y, wRaquete, hRaquete, xBolinha, yBolinha, raio);
-  if (colidiu) {
+  if(colidiu){
     velocidadeXBolinha *= -1;
     raquetada.play();
   }
 }
 
-function incluiPlacar() {
+function incluiPlacar(){
   stroke(255);
   textAlign(CENTER);
   textSize(16);
@@ -140,12 +140,12 @@ function incluiPlacar() {
   text(pontosP2, 470, 26);
 }
 
-function marcaPonto() {
-  if (xBolinha > 590) {
+function marcaPonto(){
+  if (xBolinha > 590){
     pontosP1 += 1;
     ponto.play();
   }
-  if (xBolinha < 10) {
+  if (xBolinha < 10){
     pontosP2 += 1;
     ponto.play();
   }
